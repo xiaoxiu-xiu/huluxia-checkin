@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#168a53">
+<title>葫芦侠 · 一键签到</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="login-wrap" id="loginView">
+    <div class="login-card">
+        <div class="brand-mark">签</div>
+        <h1 class="brand">一键签到</h1>
+        <p class="sub">登录葫芦侠账号，一次签到全部板块</p>
+
+        <label for="account">账号</label>
+        <input id="account" type="text" placeholder="手机号 / 用户名" autocomplete="username" spellcheck="false">
+
+        <label for="password">密码</label>
+        <input id="password" type="password" placeholder="登录密码" autocomplete="current-password">
+
+        <button class="btn-primary btn-block" id="loginBtn">登 录</button>
+        <div class="error" id="loginError"></div>
+        <p class="hint" style="margin-top:16px;">密码只用于本次登录，不会写入磁盘。</p>
+    </div>
+</div>
+
+<div class="app-wrap hidden" id="appView">
+    <div class="topbar">
+        <div>
+            <h1>一键签到</h1>
+            <p class="sub">全部板块 · 自动逐个签到</p>
+        </div>
+        <div class="userbox">
+            <span class="userpill"><span class="dot"></span><span id="nickText">已登录</span></span>
+            <button class="btn-ghost btn-sm" id="logoutBtn">退出</button>
+        </div>
+    </div>
+
+    <div class="card main-card">
+        <div class="stats">
+            <div class="stat"><b id="statSuccess">-</b><small>成功板块</small></div>
+            <div class="stat"><b id="statTotal">-</b><small>全部板块</small></div>
+        </div>
+
+        <button class="btn-primary btn-checkin" id="checkinBtn">📅 一键签到全部板块</button>
+        <div class="error" id="checkinError"></div>
+        <p class="hint" id="checkinHint">签到过程约几秒，请勿关闭页面。</p>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span>签到结果</span><span id="resultSummary"></span></div>
+        <div class="result-box" id="resultBox">
+            <div class="result-empty">还没有签到记录</div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

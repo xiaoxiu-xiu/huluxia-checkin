@@ -1,0 +1,83 @@
+# 葫芦侠 · 一键签到（独立版）
+
+只保留「账号密码登录 + 一键签到全部板块」，不包含送葫芦、评论监控、视频发帖等功能。
+
+## 功能
+
+- 前台账号密码登录，自动获取 `_key`
+- 一键获取全部板块并逐个签到
+- 显示每个板块的签到成功/失败原因
+- 汇总成功数 / 总数
+- 登录态只保存在后台内存，密码不落盘
+- 独立端口 `5002`，可以和主项目同时运行
+
+## 文件结构
+
+```text
+一件签到/
+├── app.py                 # Flask 后台
+├── hlx_api.py             # 登录、板块列表、签到接口与签名
+├── templates/index.html   # 前端页面
+├── static/style.css       # 样式
+├── static/app.js          # 前端逻辑
+├── data/                  # 预留数据目录
+├── tests/test_checkin.py  # 签到签名/流程测试
+├── requirements.txt
+├── start.bat
+└── README.md
+```
+
+## 运行
+
+```bash
+cd 一件签到
+pip install -r requirements.txt
+python app.py
+```
+
+或双击 `start.bat`。
+
+打开：
+
+```text
+http://127.0.0.1:5002
+```
+
+默认端口 5002，可通过环境变量 `PORT` 修改；`HOST` 默认 `0.0.0.0`，只在可信网络使用。
+
+## 使用
+
+1. 输入葫芦侠账号、密码登录
+2. 点「📅 一键签到全部板块」
+3. 等待几秒，下方会列出每个板块的结果
+4. 顶部显示成功板块数 / 全部板块数
+
+## 接口
+
+| 方法 | 路径 | 说明 |
+| --- | --- | --- |
+| POST | `/api/login` | 账号密码登录 |
+| POST | `/api/logout` | 退出 |
+| GET | `/api/me` | 当前登录状态 |
+| POST | `/api/checkin` | 一键签到全部板块 |
+
+签到接口：
+
+```text
+GET  /category/list/ANDROID/2.0
+POST /user/signin/ANDROID/4.1.8?cat_id=...&time=...&sign=...
+```
+
+签名：`cat_id + time + fa1c28a5b62e79c3e63d9030b6142e4b` 的 MD5（小写），与主项目 / `hlx-web-py-video` 一致。
+
+## 注意
+
+- 单个板块失败不会影响其他板块，失败原因会显示在结果列表里
+- 签到需要有效的登录态；如果提示未登录，退出重新登录
+- 不要把服务暴露到公网
+- 密码只用于登录换取 `_key`，不会保存；设备标识保存在本地 `data/device.json`，已被 `.gitignore` 排除
+- 仓库不包含账号、密码、`_key`、运行日志等个人信息
+
+## 来源
+
+登录与签到逻辑取自 `hlx-web-py-video` 的 `/category/list`、`/user/signin` 实现；本目录是独立副本，不依赖主项目。
