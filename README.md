@@ -13,7 +13,7 @@
 ## 文件结构
 
 ```text
-一件签到/
+一键签到/
 ├── app.py                 # Flask 后台
 ├── hlx_api.py             # 登录、板块列表、签到接口与签名
 ├── templates/index.html   # 前端页面
@@ -66,8 +66,6 @@ http://127.0.0.1:5002
 GET  /category/list/ANDROID/2.0
 POST /user/signin/ANDROID/4.1.8?cat_id=...&time=...&sign=...
 ```
-
-签名：`cat_id + time + fa1c28a5b62e79c3e63d9030b6142e4b` 的 MD5（小写），与主项目 / `hlx-web-py-video` 一致。
 
 ## 注意
 
