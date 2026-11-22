@@ -29,7 +29,7 @@
 ## 运行
 
 ```bash
-cd 一件签到
+cd 一键签到
 pip install -r requirements.txt
 python app.py
 ```
