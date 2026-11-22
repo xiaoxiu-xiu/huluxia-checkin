@@ -60,12 +60,6 @@ http://127.0.0.1:5002
 | GET | `/api/me` | 当前登录状态 |
 | POST | `/api/checkin` | 一键签到全部板块 |
 
-签到接口：
-
-```text
-GET  /category/list/ANDROID/2.0
-POST /user/signin/ANDROID/4.1.8?cat_id=...&time=...&sign=...
-```
 
 ## 注意
 
